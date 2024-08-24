@@ -1,0 +1,20 @@
+const authRoutes = require("routes/auth.route")
+const userRoutes = require("routes/user.route")
+const roleRoutes = require("routes/role.route")
+const postRoutes = require("routes/post.route")
+const categoryRoutes = require("routes/category.route")
+const languageRoutes = require("routes/language.route")
+const commentRoutes = require("routes/comment.router")
+const uploadRoutes = require("routes/upload.route")
+const authMiddleware = require("kernels/middlewares/auth.middleware")
+
+module.exports = (app) => {
+  app.use("/auth", authRoutes)
+  app.use("/users", authMiddleware.requireAuth, userRoutes)
+  app.use("/roles", authMiddleware.requireAuth, roleRoutes)
+  app.use("/posts", authMiddleware.requireAuth, postRoutes)
+  app.use("/categories", authMiddleware.requireAuth, categoryRoutes)
+  app.use("/languages", authMiddleware.requireAuth, languageRoutes)
+  app.use("/comments", authMiddleware.requireAuth, commentRoutes)
+  app.use("/upload", uploadRoutes)
+};
